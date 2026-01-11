@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет сотрудника склада</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-warehouse"></i> Управление заказами склада</h1>
+            <div class="date-control">
+                <span id="current-date-display"></span>
+                <button id="next-day-btn" class="btn btn-primary">
+                    <i class="fas fa-forward"></i> Следующий день
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard">
+                <section class="orders-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-clipboard-list"></i> Заказы</h2>
+                        <button id="add-order-btn" class="btn btn-success">
+                            <i class="fas fa-plus"></i> Новый заказ
+                        </button>
+                    </div>
+                    <div id="orders-list" class="orders-list">
+                        <!-- Заказы будут загружены здесь -->
+                    </div>
+                </section>
+
+                <section class="products-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-boxes"></i> Товары на складе</h2>
+                    </div>
+                    <div id="products-list" class="products-list">
+                        <!-- Товары будут загружены здесь -->
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Модальное окно для заказа -->
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Новый заказ</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="order-form">
+                        <input type="hidden" id="order-id">
+                        <div class="form-group">
+                            <label for="customer-name">ФИО заказчика:</label>
+                            <input type="text" id="customer-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="order-date">Дата заказа:</label>
+                            <input type="date" id="order-date" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-order-btn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для позиции -->
+        <div id="item-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Добавить позицию</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="item-form">
+                        <input type="hidden" id="item-id">
+                        <input type="hidden" id="item-order-id">
+                        <div class="form-group">
+                            <label for="product-select">Товар:</label>
+                            <select id="product-select" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item-quantity">Количество:</label>
+                            <input type="number" id="item-quantity" min="1" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-item-btn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для перемещения позиции -->
+        <div id="move-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Переместить позицию</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="move-form">
+                        <input type="hidden" id="move-item-id">
+                        <div class="form-group">
+                            <label for="order-select">В заказ:</label>
+                            <select id="order-select" required></select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Переместить</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-move-btn">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
